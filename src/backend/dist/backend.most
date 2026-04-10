@@ -1,0 +1,33 @@
+// Version: 1.0.0
+type ConversationId__966455625 = Nat;
+type Conversation__686238356 =
+  {
+    createdAt : Timestamp__301639476;
+    id : ConversationId__966455625;
+    messages : [Message__454780518];
+    sessionKey : SessionKey__902522772;
+    var title : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Message__454780518 =
+  {content : Text; role : Role__711988144; timestamp : Timestamp__301639476};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Role__711988144 = {#assistant; #user};
+type SessionKey__902522772 = Text;
+type Timestamp__301639476 = Int;
+actor {
+  stable var nextId : Nat;
+  stable store :
+    {
+      var root :
+        Node__46230540<ConversationId__966455625, Conversation__686238356>;
+      var size : Nat__490723111
+    }
+};

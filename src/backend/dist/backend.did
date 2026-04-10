@@ -1,0 +1,65 @@
+type http_request_result = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type http_header = 
+ record {
+   name: text;
+   value: text;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: http_request_result;
+ };
+type Timestamp = int;
+type SessionKey = text;
+type Role = 
+ variant {
+   assistant;
+   user;
+ };
+type Message = 
+ record {
+   content: text;
+   role: Role;
+   timestamp: Timestamp;
+ };
+type ConversationSummary = 
+ record {
+   createdAt: Timestamp;
+   id: ConversationId;
+   messageCount: nat;
+   title: text;
+ };
+type ConversationPublic = 
+ record {
+   createdAt: Timestamp;
+   id: ConversationId;
+   messages: vec Message;
+   sessionKey: SessionKey;
+   title: text;
+ };
+type ConversationId = nat;
+service : {
+  createConversation: (sessionKey: SessionKey, title: text) ->
+   (ConversationId);
+  deleteConversation: (sessionKey: SessionKey, id: ConversationId) -> (bool);
+  getConversation: (sessionKey: SessionKey, id: ConversationId) ->
+   (opt ConversationPublic) query;
+  listConversations: (sessionKey: SessionKey) ->
+   (vec ConversationSummary) query;
+  renameConversation: (sessionKey: SessionKey, id: ConversationId, newTitle:
+   text) -> (bool);
+  sendMessage: (sessionKey: SessionKey, conversationId: ConversationId,
+   content: text) -> (text);
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+}

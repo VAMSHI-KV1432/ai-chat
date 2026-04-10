@@ -1,0 +1,21 @@
+{
+  "overview": "A ChatGPT-like AI chat interface where anyone can start conversations with an AI, with full chat history saved across sessions. No login required — open to all users.",
+  "features": [
+    "Chat with AI in a familiar ChatGPT-style interface",
+    "Chat history saved and persists across page refreshes",
+    "Sidebar with all past conversations — click to continue any chat",
+    "Start new conversations, rename, or delete old ones",
+    "No login required — open to anyone immediately",
+    "Loading states and error handling for AI responses"
+  ],
+  "category": "productivity",
+  "tags": [
+    "ai",
+    "chat",
+    "chatgpt",
+    "productivity",
+    "history",
+    "no-login"
+  ],
+  "last_updated": "2026-04-10T10:17:51.475Z"
+}
